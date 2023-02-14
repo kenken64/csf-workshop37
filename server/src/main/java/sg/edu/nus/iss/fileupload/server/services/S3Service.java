@@ -36,10 +36,6 @@ public class S3Service {
         metadata.setUserMetadata(userData);
         String key = UUID.randomUUID().toString()
             .substring(0, 8);
-        System.out.println("myobjects/%s".formatted(key));
-        System.out.println(s3Client.doesBucketExistV2("kk74mybucket"));
-        System.out.println(s3Client.doesBucketExistV2("kk74mybucket.kk74mybucket"));
-        System.out.println(file.getOriginalFilename());
         StringTokenizer tk = new StringTokenizer(file.getOriginalFilename(), ".");
         int count = 0;
         String filenameExt = "";

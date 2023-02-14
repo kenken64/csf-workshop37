@@ -1,6 +1,7 @@
 package sg.edu.nus.iss.fileupload.server.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import sg.edu.nus.iss.fileupload.server.services.FileUploadService;
 import sg.edu.nus.iss.fileupload.server.services.S3Service;
 
 @Controller
@@ -22,6 +24,9 @@ public class FileUploadController {
     
     @Autowired
     private S3Service s3svc;
+
+    @Autowired
+    private FileUploadService flSvc;
 
     @PostMapping(path="/upload-ng", 
             consumes=MediaType.MULTIPART_FORM_DATA_VALUE, 
@@ -32,13 +37,14 @@ public class FileUploadController {
         @RequestPart MultipartFile imageFile,
         @RequestPart String title,
         @RequestPart String complain
-    ){
+    ) throws SQLException{
         String key = "";
         System.out.printf("title: %s", title);
         System.out.printf("complain: %s", complain);
         
         try {
             key = s3svc.upload(imageFile);
+            flSvc.uploadBlob(imageFile, title, complain);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +60,6 @@ public class FileUploadController {
     public String uploadTF(@RequestPart MultipartFile myfile, @RequestPart String name,
         Model model){
         String key = "";
-        System.out.printf("name: %s\n", name);
         try {
             key = s3svc.upload(myfile);
         } catch (IOException e) {
