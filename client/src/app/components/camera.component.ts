@@ -10,8 +10,7 @@ import { CameraService } from '../services/camera.service';
   styleUrls: ['./camera.component.css']
 })
 export class CameraComponent implements OnInit, OnDestroy, AfterViewInit{
-  @ViewChild(WebcamComponent)
-  webcam!: WebcamComponent;
+  @ViewChild(WebcamComponent) webcam!: WebcamComponent;
   width =  400;
   height = 400
   pics: string[] = []
@@ -21,7 +20,7 @@ export class CameraComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnInit(): void {
-      console.log("init ... " + this.webcam);
+      
   }
 
   ngOnDestroy(): void {

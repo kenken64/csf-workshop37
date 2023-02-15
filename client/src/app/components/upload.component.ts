@@ -30,7 +30,6 @@ export class UploadComponent implements OnInit{
         }
       );
       this.blob = this.dataURItoBlob(this.imageData);
-      console.log(this.blob);
   }
 
   upload(){
