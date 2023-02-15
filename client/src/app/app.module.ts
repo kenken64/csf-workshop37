@@ -14,12 +14,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MaterialModule } from './material.module';
+import { ViewimageComponent } from './components/viewimage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CameraComponent,
-    UploadComponent
+    UploadComponent,
+    ViewimageComponent
   ],
   imports: [
     BrowserModule,

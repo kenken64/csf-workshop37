@@ -1,14 +1,12 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
   <mat-toolbar-row>
     <span>Feedback Camera</span>
     <span class="example-spacer"></span>
-    
+    <button mat-button routerLink="/upload">
+      <mat-icon>upload</mat-icon>
+      Upload
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
-<a [routerLink]="['/upload']">Upload</a>
 <router-outlet></router-outlet>
-<!-- <h1>Feedback Camera</h1>
-<a [routerLink]="['/upload']">Upload</a>
-<div class="box">
-  
-</div> -->
+
