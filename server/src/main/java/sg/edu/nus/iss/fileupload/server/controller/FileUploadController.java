@@ -78,14 +78,26 @@ public class FileUploadController {
         return "upload";
     }
 
+    // @GetMapping(path="/get-image/{postId}")
+    // public String retrieveImage(@PathVariable Integer postId, Model model){
+    //     Optional<Post> opt= flSvc.getPostById(postId);
+    //     Post p = opt.get();
+    //     String encodedString = Base64.getEncoder().encodeToString(p.getImage());
+    //     model.addAttribute("title", p.getTitle());
+    //     model.addAttribute("complain", p.getComplain());
+    //     model.addAttribute("file", BASE64_PREFIX_DECODER + encodedString);
+    //     return "blob";
+    // }
+
     @GetMapping(path="/get-image/{postId}")
-    public String retrieveImage(@PathVariable Integer postId, Model model){
+    @CrossOrigin()
+    public ResponseEntity<String> retrieveImage(@PathVariable Integer postId, Model model){
         Optional<Post> opt= flSvc.getPostById(postId);
         Post p = opt.get();
         String encodedString = Base64.getEncoder().encodeToString(p.getImage());
-        model.addAttribute("title", p.getTitle());
-        model.addAttribute("complain", p.getComplain());
-        model.addAttribute("file", BASE64_PREFIX_DECODER + encodedString);
-        return "blob";
+        JsonObject payload = Json.createObjectBuilder()
+            .add("image", BASE64_PREFIX_DECODER + encodedString)
+            .build();
+        return ResponseEntity.ok(payload.toString());
     }
 }

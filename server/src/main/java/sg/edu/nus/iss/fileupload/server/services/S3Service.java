@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,10 @@ public class S3Service {
     
     @Autowired
     private AmazonS3 s3Client;
+
+    @Value("${do.storage.bucket.name}")
+    private String bucketName;
+    //"kk64nusiss"
 
     public String upload(MultipartFile file) throws IOException{
         // User data
@@ -53,7 +58,7 @@ public class S3Service {
             filenameExt = filenameExt + ".png";
         PutObjectRequest putRequest = 
             new PutObjectRequest(
-                "kk74mybucket", 
+                this.bucketName, 
                 "myobjects/%s.%s".formatted(key, filenameExt), 
                 file.getInputStream(), 
                 metadata);
