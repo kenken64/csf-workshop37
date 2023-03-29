@@ -25,8 +25,7 @@ public class S3Service {
 
     @Value("${do.storage.bucket.name}")
     private String bucketName;
-    //"kk64nusiss"
-
+    
     public String upload(MultipartFile file) throws IOException{
         // User data
         Map<String, String> userData = new HashMap<>();
